@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pickleguard"
+version = "0.1.0"
+description = "Statically detect malicious pickle opcodes in ML model files (.pkl/.pt/.pth) without unpickling them."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Yamraj", email = "solankisumitt@gmail.com" }]
+keywords = [
+    "ml-security",
+    "pickle",
+    "model-scanning",
+    "safetensors",
+    "supply-chain",
+    "ai-security",
+    "security",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = []  # stdlib-only (pickletools, zipfile)
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+pickleguard = "pickleguard.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/YAMRAJ13y/pickleguard"
+Issues = "https://github.com/YAMRAJ13y/pickleguard/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
